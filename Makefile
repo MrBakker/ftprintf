@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-CC := gcc
+CC := cc
 DIR := objs/
 EXTRAFLAGS := -Wall -Wextra -Werror
 

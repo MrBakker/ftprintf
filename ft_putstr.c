@@ -6,12 +6,11 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 14:57:07 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 17:01:16 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/10 18:34:29 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_putstr(char *str, t_flags *flags)
 {

@@ -6,12 +6,11 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 13:52:08 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 16:09:26 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/23 16:14:40 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	set_flag_value(const char *format, int index, int *flag)
 {
@@ -53,8 +52,7 @@ int	get_flags(const char *format, int index, t_flags *flags)
 	if (format[index] >= '0' && format[index] <= '9')
 		index += set_flag_value(format, index, &flags->width);
 	if (format[index] == '.')
-		if (format[++index] >= '0' && format[index] <= '9')
-			index += (set_flag_value(format, index, &flags->dot));
+		index += (set_flag_value(format, index + 1, &flags->dot) + 1);
 	return (index);
 }
 

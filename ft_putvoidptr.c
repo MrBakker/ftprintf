@@ -6,13 +6,13 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 15:43:41 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 16:37:04 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/23 16:11:46 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_put_ulong(unsigned long numb, int print)
+static int	ft_put_ulong(unsigned long numb, int print)
 {
 	char	c;
 	int		out;

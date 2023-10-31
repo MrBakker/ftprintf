@@ -6,14 +6,13 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 18:17:11 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 16:34:27 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/23 16:38:24 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int	ft_put_int(int numb, int print)
+static int	ft_put_int(int numb, int print)
 {
 	char	c;
 	int		out;
@@ -33,7 +32,7 @@ int	ft_put_int(int numb, int print)
 	return (out);
 }
 
-void	get_flag_data(int num, int *extra_0, int *extra_s, t_flags *flag)
+static void	get_flag_data(int num, int *extra_0, int *extra_s, t_flags *flag)
 {
 	int	length;
 
