@@ -6,7 +6,7 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 14:58:19 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 16:57:19 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/31 14:27:38 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ void	ft_bzero(void *s, size_t n)
 int	ft_max(int a, int b)
 {
 	return ((a > b) * a + (b >= a) * b);
+}
+
+int	ft_abs(int num)
+{
+	return ((num < 0) * -num + (num >= 0) * num);
 }

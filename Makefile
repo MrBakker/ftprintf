@@ -5,7 +5,7 @@ DIR := objs/
 EXTRAFLAGS := -Wall -Wextra -Werror
 
 SRCS := ft_printf.c ft_printf_utils.c ft_putstr.c ft_putchar.c \
-	ft_putvoidptr.c ft_putnum.c ft_putunum.c ft_printhex.c
+	ft_putvoidptr.c ft_putnum.c ft_putunum.c ft_printhex.c ft_flags.c
 
 BINS := $(addprefix ${DIR}, ${SRCS:.c=.o})
 

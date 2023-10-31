@@ -6,13 +6,13 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/10 14:35:59 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/10 18:34:24 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/10/31 19:51:50 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_put_uint(unsigned int numb, int print)
+int	ft_put_uint(unsigned int numb, int print)
 {
 	char	c;
 	int		out;
