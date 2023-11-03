@@ -18,9 +18,9 @@ int	ft_putchar(char c, t_flags *flags)
 
 	extra = flags->width - 1;
 	while (extra-- > 0 && !flags->dash)
-		write(1, " ", 1);
-	write(1, &c, 1);
+		ft_write(0, " ", 1);
+	ft_write(0, &c, 1);
 	while (extra-- >= 0)
-		write(1, " ", 1);
+		ft_write(0, " ", 1);
 	return (ft_max(1, flags->width));
 }

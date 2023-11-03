@@ -26,7 +26,7 @@ int	ft_put_uint(unsigned int numb, int print)
 		c = numb % 10 + '0';
 	}
 	if (print)
-		write(1, &c, 1);
+		ft_write(0, &c, 1);
 	return (out);
 }
 
@@ -57,12 +57,12 @@ int	ft_putunum(int num, t_flags *flags)
 	output = extra_0 + extra_space;
 	if (!flags->dash && extra_space > 0)
 		while (extra_space--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	while (extra_0-- > 0)
-		write(1, "0", 1);
+		ft_write(0, "0", 1);
 	if (!(flags->dot == 0 && num == 0))
 		output += ft_put_uint(num, 1);
 	while (extra_space-- > 0)
-		write(1, " ", 1);
+		ft_write(0, " ", 1);
 	return (output);
 }

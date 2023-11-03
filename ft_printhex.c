@@ -23,7 +23,7 @@ static int	ft_put_hex(unsigned int numb, int hex, int print)
 	if (print)
 	{
 		c = num_to_hex(numb % 16, hex);
-		write(1, &c, 1);
+		ft_write(0, &c, 1);
 	}
 	return (out);
 }
@@ -55,16 +55,16 @@ int	ft_printhex(int num, int hex, t_flags *flags)
 	output = extra_0 + extra_space;
 	if (!flags->dash && extra_space > 0)
 		while (extra_space--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	if (flags->hashtag && hex == 'a' && num != 0)
-		output += write(1, "0x", 2);
+		ft_write(0, "0x", 2);
 	else if (flags->hashtag && hex == 'A' && num != 0)
-		output += write(1, "0X", 2);
+		ft_write(0, "0X", 2);
 	while (extra_0-- > 0)
-		write(1, "0", 1);
+		ft_write(0, "0", 1);
 	if (!(flags->dot == 0 && num == 0))
-		output += ft_put_hex((unsigned int)num, hex, 1);
+		ft_put_hex((unsigned int)num, hex, 1);
 	while (extra_space-- > 0)
-		write(1, " ", 1);
+		ft_write(0, " ", 1);
 	return (output);
 }

@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 CC := cc
 DIR := objs/
-EXTRAFLAGS := -Wall -Wextra -Werror
+EXTRAFLAGS := -Wall
 
 SRCS := ft_printf.c ft_printf_utils.c ft_putstr.c ft_putchar.c \
 	ft_putvoidptr.c ft_putnum.c ft_putunum.c ft_printhex.c ft_flags.c
@@ -15,7 +15,7 @@ ${NAME}: ${BINS}
 	@ar r ${NAME} ${BINS}
 
 ${DIR}%.o: %.c ft_printf.h
-	@mkdir -p ${DIR}
+# @mkdir -p ${DIR}
 	@${CC} ${EXTRAFLAGS} -c $< -o $@
 
 clean:

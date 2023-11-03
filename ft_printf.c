@@ -13,6 +13,34 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
+int	ft_write(int force, const char *str, int len)
+{
+	static t_buff	buff;
+	char			*temp_buff;
+
+	if (buff.capacity < buff.index + len || force)
+	{
+		if (!force)
+			temp_buff = (char *)malloc(ft_max((buff.capacity + 2) * 2, buff.index + len) * sizeof(char));
+		if (force || !temp_buff)
+		{
+			buff.written += write(1, buff.buff, buff.index);
+			buff.written += write(1, str, len);
+			buff.index = 0;
+			free(buff.buff);
+			buff.buff = NULL;
+			return (buff.written);
+		}
+		buff.capacity = ft_max((buff.capacity + 50) * 2, buff.index + len);
+		ft_memcpy(temp_buff, buff.buff, buff.index + 1);
+		free(buff.buff);
+		buff.buff = temp_buff;
+	}
+	ft_memcpy(buff.buff + buff.index, str, len);
+	buff.index += len;
+	return (buff.written + buff.index);
+}
+
 int	function_switch(char c, va_list *arguments, t_flags *flags)
 {
 	if (c == 'c')
@@ -29,12 +57,14 @@ int	function_switch(char c, va_list *arguments, t_flags *flags)
 		return (ft_printhex(va_arg(*arguments, int), 'a', flags));
 	if (c == 'X')
 		return (ft_printhex(va_arg(*arguments, int), 'A', flags));
-	if (c == '%')
-		return (write(1, "%", 1));
+	if (c == '%'){
+		ft_write(0, "%", 1);
+		return (1);
+	}
 	return (-1);
 }
 
-void	print_normal_string(const char *ptr, int *index, int *char_count)
+void	print_normal_string(const char *ptr, int *index)
 {
 	int	length;
 
@@ -42,12 +72,12 @@ void	print_normal_string(const char *ptr, int *index, int *char_count)
 	while (ptr[length] && ptr[length] != '%')
 		length++;
 	if (length)
-		write(1, ptr, length);
+		ft_write(0, ptr, length);
+		// write(1, ptr, length);
 	*index += length;
-	*char_count += length;
 }
 
-void	print_argument(const char *ptr, int *idx, int *c_count, va_list *args)
+void	print_argument(const char *ptr, int *idx, va_list *args)
 {
 	t_flags	flags;
 	int		chars_written;
@@ -60,15 +90,12 @@ void	print_argument(const char *ptr, int *idx, int *c_count, va_list *args)
 	if (chars_written == -1)
 	{
 		ft_print_flags(&flags, &chars_written);
-		*c_count += chars_written + 1;
 		if (!*(ptr + chr_to_skip + 1))
 			*idx -= 1;
 		else if (*(ptr + chr_to_skip + 1) <= 'a'
 			|| *(ptr + chr_to_skip + 1) >= 'z')
-			*c_count += write(1, ptr + chr_to_skip + 1, 1);
+			ft_write(0, ptr + chr_to_skip + 1, 1);
 	}
-	else
-		*c_count += chars_written;
 	*idx += chr_to_skip + 2;
 }
 
@@ -83,46 +110,11 @@ int	ft_printf(const char *format, ...)
 	va_start(arguments, format);
 	while (format[index])
 	{
-		print_normal_string(&format[index], &index, &char_count);
-		print_argument(&format[index], &index, &char_count, &arguments);
+		print_normal_string(&format[index], &index);
+		print_argument(&format[index], &index, &arguments);
 	}
 	va_end(arguments);
-	return (char_count);
+	return (ft_write(1, NULL, 0));
 }
 
-// char    ptr1[] = "This %s is a |%   ---+q| [% ]% ++|| test\n%000---++++
-// 234563478.2345b\n\n";
-
-// int main(void)
-// {
-//     char    ptr1[] = "This %s is a |%                  ++   ---0000####>\\h
-//    ---+H| [%%%%%%% ]% ++|| test\n%000---++++234563478.2345Q\n\nfgggh %%%----
-// 		Hoi\n%      -####]geuigh\n%----++++534534.12\n";
-//     char    *ptr2 = "HELLO";
-
-//     int count1 = printf(ptr1, ptr2);
-//     int count2 = ft_printf(ptr1, ptr2);
-//     if (count1 != count2)
-//         {printf("\n-\nReturn value is incorrect :((\nYour function:\t%d
-// \nStd function:\t%d\n-\n", count2, count1);}
-// // 	char *n = NULL;
-// // 	count1 = printf("%10s|\n", n);
-// // 	count2 = ft_printf("%10s|\n", n);
-// // 	if (count1 != count2)
-// //         {printf("\n-\nReturn value is incorrect :((\nYour function:\t%d
-// \nStd function:\t%d\n-\n", count2, count1);}
-// // 	char format[] = "This i%2s... failed?\n";
-// // 	char param[] = "s a test";
-// // 	count1 = printf(format, param);
-// // 	count2 = ft_printf(format, param);
-// // 	if (count1 != count2)
-// //         {printf("\n-\nReturn value is incorrect :((\nYour function:\t%d
-// \nStd function:\t%d\n-\n", count2, count1);}
-// // 	char format2[] = "This is a number %#+15.8X... failed?\n";
-// // 	int payload = 1;
-// // 	count1 = printf(format2, payload);
-// // 	count2 = ft_printf(format2, payload);
-// // 	if (count1 != count2)
-// //         {printf("\n-\nReturn value is incorrect :((\nYour function:\t%d
-// \nStd function:\t%d\n-\n", count2, count1);}
-// }
+// char    ptr1[] = "This %s is a |%   ---+q| [% ]% ++|| test\n%000---++++234563478.2345b\n\n";

@@ -27,13 +27,13 @@ int	ft_putstr(char *str, t_flags *flags)
 		extra = flags->width - length;
 	if (extra > 0 && !flags->dash)
 		while (extra--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	if (length > 0 && str)
-		write(1, str, length);
+		ft_write(0, str, length);
 	else if (length == 6 && !str)
-		write(1, "(null)", 6);
+		ft_write(0, "(null)", 6);
 	if (extra > 0 && flags->dash)
 		while (extra--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	return (ft_max(length, flags->width));
 }

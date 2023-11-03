@@ -23,7 +23,7 @@ static int	ft_put_ulong(unsigned long numb, int print)
 	if (print)
 	{
 		c = num_to_hex(numb % 16, 'a');
-		write(1, &c, 1);
+		ft_write(0, &c, 1);
 	}
 	return (out);
 }
@@ -40,16 +40,16 @@ int	ft_putvoidptr(void *ptr, t_flags *flags)
 	extra = flags->width - length;
 	if (extra > 0 && !flags->dash)
 		while (extra--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	if (ptr)
 	{
-		write(1, "0x", 2);
+		ft_write(0, "0x", 2);
 		ft_put_ulong((unsigned long)ptr, 1);
 	}
 	else
-		write(1, "(nil)", 5);
+		ft_write(0, "(nil)", 5);
 	if (extra > 0 && flags->dash)
 		while (extra--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	return (ft_max(flags->width, length));
 }

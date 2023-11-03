@@ -28,7 +28,7 @@ static int	ft_put_int(int numb, int print)
 		c = '0' - numb % 10;
 	}
 	if (print)
-		write(1, &c, 1);
+		ft_write(0, &c, 1);
 	return (out);
 }
 
@@ -60,18 +60,18 @@ int	ft_putnum(int num, t_flags *flags)
 	output = extra_0 + extra_space;
 	if (!flags->dash && extra_space > 0)
 		while (extra_space--)
-			write(1, " ", 1);
+			ft_write(0, " ", 1);
 	if (num < 0)
-		output += write(1, "-", 1);
+		ft_write(0, "-", 1);
 	if (num >= 0 && flags->plus)
-		output += write(1, "+", 1);
+		ft_write(0, "+", 1);
 	else if (num >= 0 && flags->space)
-		output += write(1, " ", 1);
+		ft_write(0, " ", 1);
 	while (extra_0-- > 0)
-		write(1, "0", 1);
+		ft_write(0, "0", 1);
 	if (!(flags->dot == 0 && num == 0))
-		output += ft_put_int(num * -1, 1);
+		ft_put_int(num * -1, 1);
 	while (extra_space-- > 0)
-		write(1, " ", 1);
+		ft_write(0, " ", 1);
 	return (output);
 }

@@ -58,22 +58,22 @@ int	get_flags(const char *format, int index, t_flags *flags)
 
 void	ft_print_flags(t_flags *flags, int *count)
 {
-	*count += write(1, "%", 1);
+	ft_write(0, "%", 1);
 	if (flags->hashtag)
-		*count += write(1, "#", 1);
+		ft_write(0, "#", 1);
 	if (flags->space && !flags->plus)
-		*count += write(1, " ", 1);
+		ft_write(0, " ", 1);
 	else if (flags->plus)
-		*count += write(1, "+", 1);
+		ft_write(0, "+", 1);
 	if (flags->zero && !flags->dash)
-		*count += write(1, "0", 1);
+		ft_write(0, "0", 1);
 	else if (flags->dash)
-		*count += write(1, "-", 1);
+		ft_write(0, "-", 1);
 	if (flags->width != -1)
-		*count += ft_put_uint(flags->width, 1);
+		ft_put_uint(flags->width, 1);
 	if (flags->dot != -1)
 	{
-		*count += write(1, ".", 1);
-		*count += ft_put_uint(flags->dot, 1);
+		ft_write(0, ".", 1);
+		ft_put_uint(flags->dot, 1);
 	}
 }

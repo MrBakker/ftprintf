@@ -47,3 +47,22 @@ int	ft_abs(int num)
 {
 	return ((num < 0) * -num + (num >= 0) * num);
 }
+
+void	*ft_memcpy(void *dest, const void *src, int n)
+{
+	int		index;
+	char	*temp_dest;
+	char	*temp_src;
+
+	index = 0;
+	temp_dest = (char *)dest;
+	temp_src = (char *)src;
+	if (!dest || !src)
+		return (NULL);
+	while (index < n)
+	{
+		temp_dest[index] = temp_src[index];
+		++index;
+	}
+	return (dest);
+}
