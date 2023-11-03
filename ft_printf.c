@@ -13,6 +13,22 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
+int	grow_buff(t_buff *buff, int min_len)
+{
+	char	*temp_buff;
+	int		new_capacity;
+
+	new_capacity = ft_max((buff->capacity + 20) * 2, min_len);
+	temp_buff = (char *)malloc(new_capacity * sizeof(char));
+	if (!temp_buff)
+		return (0);
+	ft_memcpy(temp_buff, buff->buff, buff->index + 1);
+	free(buff->buff);
+	buff->buff = temp_buff;
+	buff->capacity = new_capacity;
+	return (new_capacity);
+}
+
 int	ft_write(int force, const char *str, int len)
 {
 	static t_buff	buff;
@@ -20,9 +36,7 @@ int	ft_write(int force, const char *str, int len)
 
 	if (buff.capacity < buff.index + len || force)
 	{
-		if (!force)
-			temp_buff = (char *)malloc(ft_max((buff.capacity + 2) * 2, buff.index + len) * sizeof(char));
-		if (force || !temp_buff)
+		if (force || !grow_buff(&buff, buff.index + len))
 		{
 			buff.written += write(1, buff.buff, buff.index);
 			buff.written += write(1, str, len);
@@ -31,10 +45,6 @@ int	ft_write(int force, const char *str, int len)
 			buff.buff = NULL;
 			return (buff.written);
 		}
-		buff.capacity = ft_max((buff.capacity + 50) * 2, buff.index + len);
-		ft_memcpy(temp_buff, buff.buff, buff.index + 1);
-		free(buff.buff);
-		buff.buff = temp_buff;
 	}
 	ft_memcpy(buff.buff + buff.index, str, len);
 	buff.index += len;
