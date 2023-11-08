@@ -6,7 +6,7 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 18:28:57 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/31 18:29:37 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/11/03 13:51:36 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_flags(const char *format, int index, t_flags *flags)
 	return (index);
 }
 
-void	ft_print_flags(t_flags *flags, int *count)
+void	ft_print_flags(t_flags *flags)
 {
 	ft_write(0, "%", 1);
 	if (flags->hashtag)

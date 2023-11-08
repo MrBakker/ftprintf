@@ -6,7 +6,7 @@
 /*   By: jbakker <jbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 13:52:13 by jbakker       #+#    #+#                 */
-/*   Updated: 2023/10/31 19:26:29 by jbakker       ########   odam.nl         */
+/*   Updated: 2023/11/03 13:51:57 by jbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		ft_putunum(int num, t_flags *flags);
 int		ft_putstr(char *str, t_flags *flags);
 int		ft_putvoidptr(void *ptr, t_flags *flags);
 int		ft_put_uint(unsigned int numb, int print);
-int 	ft_write(int force, const char *str, int len);
+int		ft_write(int force, const char *str, int len);
 int		ft_printhex(int num, int hex, t_flags *flags);
 int		get_flags(const char *format, int index, t_flags *flags);
 int		set_flag_value(const char *format, int index, int *flag);
@@ -53,7 +53,7 @@ int		set_flag_value(const char *format, int index, int *flag);
 char	num_to_hex(int num, char base_case);
 
 void	ft_bzero(void *s, size_t n);
-void	ft_print_flags(t_flags *flags, int *count);
+void	ft_print_flags(t_flags *flags);
 
 void	*ft_memcpy(void *dest, const void *src, int n);
 
