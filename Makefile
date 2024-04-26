@@ -4,7 +4,7 @@ CC := cc
 DIR := objs/
 EXTRAFLAGS := -Wall -Wextra -Werror
 
-SRCS := main.c ft_printf.c ft_printf_utils.c ft_putstr.c ft_putchar.c \
+SRCS := ft_printf.c ft_printf_utils.c ft_putstr.c ft_putchar.c \
 	ft_putvoidptr.c ft_putnum.c ft_putunum.c ft_printhex.c ft_flags.c \
 	ft_write.c
 
